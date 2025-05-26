@@ -1,0 +1,26 @@
+{
+  "name": "randomnotify",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run before && vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "before": "bun run vite.before.ts"
+  },
+  "dependencies": {
+    "marked": "^15.0.12",
+    "sober": "^1.1.5",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.14",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.8"
+  }
+}

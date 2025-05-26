@@ -1,0 +1,12 @@
+{
+  "startWorkAudios": [
+    "startWork1.wav",
+    "startWork2.wav",
+    "startWork3.wav"
+  ],
+  "startRestAudios": [
+    "startRest1.wav",
+    "startRest2.wav",
+    "startRest3.wav"
+  ]
+}
