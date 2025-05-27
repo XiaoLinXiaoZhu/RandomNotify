@@ -38,6 +38,8 @@ jobs:
           bun install
 
       - name: Build project using Vite
+        env:
+          GITHUB_PAGES : true
         run: |
           bun run build
 
