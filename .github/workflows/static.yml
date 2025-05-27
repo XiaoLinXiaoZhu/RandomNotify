@@ -28,13 +28,10 @@ jobs:
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest  # 或指定版本，如 "1.0.0"
 
       - name: Check Bun version
         run: |
           bun --version
-          bun env
 
       - name: Install dependencies
         run: |
