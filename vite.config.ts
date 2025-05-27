@@ -17,4 +17,10 @@ export default defineConfig({
     }
   },
   base: process.env.GITHUB_PAGES ? '/RandomNotify/' : '/',
+  define: {
+    'process.env': {
+      GITHUB_PAGES: process.env.GITHUB_PAGES || false ,
+      __APP_BASE_PATH__: process.env.GITHUB_PAGES ? '/RandomNotify/' : '/'
+    }
+  }
 })

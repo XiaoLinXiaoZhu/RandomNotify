@@ -1,13 +1,13 @@
 // 读取音频文件，并且将文件名总结到 audio.json 中
 
-import {startWorkAudioFolder,startRestAudioFolder} from './src/audio/audioManager.ts';
+import {startWorkAudioFolder,startRestAudioFolder} from './src/audio/audioConfig';
 
 // 读取音频文件，并且将文件名总结到 audio.json 中
 import * as bun from 'bun';
 import { readdir } from "node:fs/promises";
 
-const startWorkAudioFiles = await readdir("./public" + startWorkAudioFolder);
-const startRestAudioFiles = await readdir("./public" + startRestAudioFolder);
+const startWorkAudioFiles = await readdir("./public/" + startWorkAudioFolder);
+const startRestAudioFiles = await readdir("./public/" + startRestAudioFolder);
 
 // 过滤掉非音频文件
 const audioFileExtensions = ['.mp3', '.wav', '.ogg', '.m4a'];
