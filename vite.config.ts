@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { env } from 'bun'
 // 使用 bun 打包一个ts为js放到public目录下
 // bun build src/service-worker/timerWorker.ts --outfile public/sw.js --target=browser
 
