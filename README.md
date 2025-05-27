@@ -1,7 +1,7 @@
 # RandomNotify - 随机间隔提示器
-![RandomNotify Logo](https://raw.githubusercontent.com/xiaolinxiaozhu/RandomNotify/main/public/xlxz.png)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/xiaolinxiaozhu/RandomNotify?style=flat)](https://github.com/xiaolinxiaozhu/RandomNotify)
+
 ## 📝 项目简介
 
 RandomNotify 是一款基于科学研究的学习效率提升工具，它采用了改良版的番茄工作法，通过设置随机间隔的提示音来提高用户的专注力和记忆力。实验表明，正确使用此方法可以将学习效率提升高达 150%，帮助用户更轻松地进入心流状态。
