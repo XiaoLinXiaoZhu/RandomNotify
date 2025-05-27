@@ -1,9 +1,11 @@
-name: Deploy to GitHub Pages
+# .github/workflows/deploy.yml
+name: Deploy Vue App to GitHub Pages with Bun + Vite
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches:
+      - main  # 指定触发的分支
+  workflow_dispatch:  # 允许手动触发
 
 permissions:
   contents: read
@@ -15,34 +17,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: latest  # 或指定版本，如 "1.0.0"
+
+      - name: Check Bun version
+        run: |
+          bun --version
+          bun env
 
       - name: Install dependencies
-        run: bun install
+        run: |
+          bun install
 
-      - name: Build project
-        run: bun run build
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v3  # 使用新版配置
+      - name: Build project using Vite
+        run: |
+          bun run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # 保持 v2 版本
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # 使用稳定版本
+        uses: actions/deploy-pages@v4
