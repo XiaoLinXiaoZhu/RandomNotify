@@ -50,6 +50,9 @@ RandomNotify 以如下方式运行：
 
 ## 🚀 开始使用
 
+你可以直接打开 RandomNotify 的网页 版本：
+[RandomNotify Web](https://xiaolinxiaozhu.github.io/RandomNotify/)
+
 目前 RandomNotify 处于开发阶段，您可以通过以下步骤体验最新版本：
 
 ```
