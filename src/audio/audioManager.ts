@@ -25,7 +25,7 @@ export function playRandomAudio(audioType: AudioType, volume: number = 1.0) {
     if (lastPlayedAudio) {
         // debug
         lastPlayedAudio.playbackRate = 16.0; // 加速播放
-        console.log('lastPlayedAudio', lastPlayedAudio, lastPlayedAudio.src, lastPlayedAudio.playbackRate);
+        // console.log('lastPlayedAudio', lastPlayedAudio, lastPlayedAudio.src, lastPlayedAudio.playbackRate);
     }
     lastPlayedAudio = audio;
     audio.play();

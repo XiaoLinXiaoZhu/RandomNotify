@@ -46,22 +46,20 @@
     <s-scroll-view class="segments-list" ref="listContainer">
       <TransitionGroup name="list">
         <div v-for="(seg, index) in segments" :key="index" class="segment-item" :data-index="index"
-          :style="{ transitionDelay: `${Math.min(Math.max(2 * index / (20 + index), 0.001), Math.max(1 - 0.05 * index,0.001))}s` }"
-          :class="{ active: index === currentSegmentIndex }" ref="el => itemRefs[index] = el as HTMLElement">
+          :style="{ transitionDelay: `${Math.min(Math.max(2 * index / (20 + index), 0.01), Math.max(1 - 0.05 * index, 0.01))}s` }"
+          :class="{ active: index === currentSegmentIndex }" :ref="el => { if (el) itemRefs[index] = el as HTMLElement }">
           <div class="segment-header">
             {{ seg.isRest ? '💤 休息' : '⏰ 工作' }} - 倒计时：{{ ifShowTimeLeft || seg.isRest ? seg.timeLeft : "***" }}s
           </div>
           <div class="segment-progress-bar">
             <div class="segment-progress-fill" v-if="ifShowTimeLeft || seg.isRest"
               :style="{ width: seg.progress + '%', backgroundColor: seg.isRest ? '#ff9800' : '#6200ea' }"></div>
-            <!-- <div class="segment-progress-fill" v-else
-              :style="{ width: seg.progress > 0 ? '100%' : '0%', backgroundColor: '#fe628a' }"></div> -->
-            <div class="segment-progress-fill" v-else-if="seg.progress <= 0 || index !== currentSegmentIndex"
-              style="width: 0%; background-color: #fe628a;"></div>
-            <div class="segment-progress-fill" v-else style="background-color: #fe628a;background-blend-mode: screen;">
-              <s-skeleton class="segment-progress-fill" style="opacity: 0.5;background-blend-mode: hard-light;"></s-skeleton>
+            <div class="segment-progress-fill" v-else-if="seg.progress > 0 && index === currentSegmentIndex"
+              style="background-color: #fe628a;background-blend-mode: screen;">
+              <s-skeleton class="segment-progress-fill" style="opacity: 0.4;background-blend-mode: hard-light;"></s-skeleton>
             </div>
-
+            <div class="segment-progress-fill" v-else
+              :style="{ width: seg.progress + '%', backgroundColor: '#fe628a' }"></div>
           </div>
         </div>
       </TransitionGroup>
@@ -99,12 +97,15 @@ const segments = ref<Segment[]>([]);
 
 const currentSegmentIndex = ref<number | null>(null);
 const listContainer = ref<HTMLElement | null>(null);
-const itemRefs = ref<HTMLElement[]>([]);
+const itemRefs = ref<(HTMLElement | null)[]>([]);
 
 const worker = new TimerWorker();
 
 worker.onmessage = (e) => {
   const msg = e.data;
+
+  //debug
+  // console.debug(msg.type,msg.payload);
 
   if (msg.type === 'UPDATE_SEGMENTS') {
     segments.value = msg.payload.segments;
@@ -152,8 +153,9 @@ function cancel() {
 function scrollToActiveItem() {
   nextTick(() => {
     const container = listContainer.value;
-    const activeItem = itemRefs.value[currentSegmentIndex.value!];
-
+    const activeItem = currentSegmentIndex.value !== null ? itemRefs.value[currentSegmentIndex.value] : null;
+    // debug
+    // console.log('scrollToActiveItem', { container, activeItem });
     if (container && activeItem) {
       const containerRect = container.getBoundingClientRect();
       const itemRect = activeItem.getBoundingClientRect();
