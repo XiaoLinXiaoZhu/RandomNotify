@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { keepAlive } from './utils/keepalive';
+
+keepAlive();
 </script>
 
 <template>
